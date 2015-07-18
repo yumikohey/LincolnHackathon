@@ -1,0 +1,29 @@
+<head>
+  <script type='text/javascript'>
+    window.onAmazonLoginReady = function() {
+      amazon.Login.setClientId('amzn1.application-oa2-client.bc66297b2b3d44c9a32e59bc32b9cb51');
+    };
+  </script>
+  <script type='text/javascript'
+src='https://static-na.payments-amazon.com/OffAmazonPayments/us/js/Widgets.js?sellerId=AVB4113TC55YI'>
+  </script>
+</head>
+
+<!-- Place this where you would like the Login with Amazon Button to appear -->
+<div id="AmazonPayButton"></div>
+<script type="text/javascript">
+  var authRequest;
+  OffAmazonPayments.Button("AmazonPayButton", "AVB4113TC55YI", {
+    type:  "LwA",
+    color: "Gold",
+    size:  "medium",
+    useAmazonAddressBook: true,
+    authorization: function() {
+      var loginOptions = {scope: 'profile payments:widget'};
+      authRequest = amazon.Login.authorize(loginOptions, "localhost:3000");
+    },
+    onError: function(error) {
+      console.log('error');
+    }
+  });
+</script>

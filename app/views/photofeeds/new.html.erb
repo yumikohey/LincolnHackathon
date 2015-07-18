@@ -1,0 +1,21 @@
+<% if !@photofeed.errors.empty? %>
+  <div class="alert alert-error">
+    <ul>
+      <% @photofeed.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="well">
+  <%= form_for @photofeed, html: { multipart: true } do |f| %>
+    <%= f.label :asin %>
+    <%= f.text_field :asin %>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+    <%= f.label :photo %>
+    <%= f.file_field :photo %>
+    <%= f.submit "Save", class: "btn btn-primary" %>
+  <% end %>
+</div>

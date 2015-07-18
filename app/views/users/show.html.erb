@@ -1,0 +1,186 @@
+<% provide(:username, @user.name ) %>
+<%= render 'landing/navigation' %>
+
+<div class="layout_block"></div>
+<div class="container">
+<div class="wrapper wrapper-content">
+<div class="row animated fadeInRight">
+    <div class="col-md-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Zoesher</h5>
+            </div>
+            <div>
+                <div class="ibox-content no-padding border-left-right">
+                    <img alt="image" class="img-responsive" src="<%= image_path('profile_big.jpg') %>">
+                </div>
+                <div class="ibox-content profile-content">
+                    <h4><strong><%= @user.name %></strong></h4>
+                    <p><i class="fa fa-map-marker"></i> Riviera State 32/106</p>
+                    <h5>
+                        About me
+                    </h5>
+                    <p>
+                        <%= @user.desc %>
+                    </p>
+                    <div class="row m-t-lg">
+                        <div class="col-md-4">
+                            
+                            <h5><strong><%= @zoeshes %></strong> Zoeshes </h5>
+                        </div>
+                        <div class="col-md-4">
+                            
+                            <h5><strong><%= @user.tiket %></strong> Tickets </h5>
+                        </div>
+                        <div class="col-md-4">
+                            
+                            <h5><strong>$<%= @user.cashback %></strong> Cashback </h5>
+                        </div>
+                    </div>
+                    <div class="user-button">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope"></i> Send Message</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-default btn-sm btn-block"><i class="fa fa-coffee"></i> Buy a coffee</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                    	<%= link_to 'Amazon Login', '/auth/amazon' %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Activites</h5>
+                <div class="ibox-tools">
+                </div>
+            </div>
+            <div class="ibox-content">
+                <% if current_user %>
+                   <% if current_user.id == @user.id %>
+                        <div class="row">
+                            <div class="col-lg-4">
+                        		<%= form_for @photofeed, :url => upload_feed_path, html: { multipart: true } do |f| %>
+                        		  <%= f.label :asin %> <br>
+                        		  <%= f.text_field :asin %> <br>
+                        		  <%= f.label :description %> <br>
+                        		  <%= f.text_field :description %> <br>
+                                  <br>
+                        		  <%= f.file_field :photo, :class => "file_upload", :accept => "image/*" %> 
+                        		  <%= f.submit "Post", class: "btn btn-primary" %>
+                        		<% end %>
+                            </div>
+                            <div class="col-lg-6 col-lg-offset-2">
+                                <div class="image-crop" style="display:none;">
+                                    <img src="<%= image_path('p3.jpg') %>">
+                                </div>
+                                <div class="img-preview img-preview-lg"></div>
+                            </div>
+                        </div>
+                        <div class="layout_block"></div>
+                    <% end %>
+                <% end %>
+
+                <div class="row">
+
+                    <% @user_zoeshes.each_with_index do |item, index| %>
+                        <% if index % 3 == 0 %>
+                          <div class="row">
+                        <% end %>
+                          <div class="zoesh_sm_box col-lg-4">
+                             <div class="zoesh_box_image">
+                                <% require 'asin' %>
+                                <% client = ASIN::Client.instance %>
+                                <% @product = client.lookup item.asin %>
+                                    <a href="<%= @product.first.detail_page_url %>"><img src="<%= item.photo %>"></a>
+                             </div>
+                             <div class="zoesh_sm_box_desc">
+                                   <span class="product-price">
+                                      <% if @product.first.item_attributes.list_price %>
+                                      <%= @product.first.item_attributes.list_price.formatted_price %> 
+                                      <% else %>
+                                      Click to see!
+                                      <% end %>
+                                   </span>
+                                 <small class="text-muted"><%= @product.first.item_attributes.brand %></small>
+                                 <a href="<%= @product.first.detail_page_url %>" class="product-name product_sm_title"> <%= @product.first.item_attributes.title %> </a>
+
+                                 <div class="small m-t-xs">
+                                     
+                                 </div>
+                                 <div class="row pull-right favor_bar">
+                                        <button class="btn btn-danger btn-circle btn-outline" type="button"><i class="fa fa-heart"></i>
+                                     </button>
+                                     <a href="<%= @product.first.detail_page_url %>" class="btn btn-xs btn-outline btn-info">Add to Cart</i></a>
+                                 </div>
+                              </div>
+                         </div>
+                         <% if (index + 1) % 3 == 0 || index + 1 == @user_zoeshes.count %>
+                          </div>
+                          <div class="layout_block"></div>
+                         <% end %>
+                    <% end %>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+</div>
+
+
+<% content_for :javascript do %>
+
+<script type="text/javascript">
+
+
+$(function() {
+
+    // var $image = $(".image-crop > img")
+    // $($image).cropper({
+    //     aspectRatio: 1.618,
+    //     preview: ".img-preview",
+    //     done: function (data) {
+    //         // Output the result data for cropping image.
+    //     }
+    // });
+
+    // var $inputImage = $(".file_upload");
+    // if (window.FileReader) {
+    //     $inputImage.change(function () {
+    //         var fileReader = new FileReader(),
+    //                 files = this.files,
+    //                 file;
+
+    //         if (!files.length) {
+    //             return;
+    //         }
+
+    //         file = files[0];
+
+    //         if (/^image\/\w+$/.test(file.type)) {
+    //             fileReader.readAsDataURL(file);
+    //             fileReader.onload = function () {
+    //                 $inputImage.val("");
+    //                 $image.cropper("reset", true).cropper("replace", this.result);
+    //             };
+    //         } else {
+    //             showMessage("Please choose an image file.");
+    //         }
+    //     });
+    // } else {
+    //     $inputImage.addClass("hide");
+    // }
+
+});
+
+</script>
+
+<% end %>

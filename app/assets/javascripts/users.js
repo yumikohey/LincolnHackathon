@@ -1,0 +1,1 @@
+//= require cropper/cropper.min.js

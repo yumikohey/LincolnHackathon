@@ -1,0 +1,73 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require animate/animate.css
+ *= require style
+ *= require font-awesome
+ */
+
+ .zoesh_box {
+  text-align: center;
+  padding: 10px;
+  background-color: #f8f8f9;
+  color: #bebec3;
+}
+
+.zoesh_box_desc{
+  padding: 10px;
+  height: 150px;
+}
+
+.zoesh_box_image img{
+  width: 280px;
+  height: 380px;
+}
+
+.product-desc{
+ 	padding: 20px;
+  position: relative;
+}
+
+.product-name{
+  height: 60px;
+}
+
+.zoesh_box_desc small.text-muted{
+  margin-bottom: 15px;
+}
+
+ .product-price {
+   font-size: 14px;
+   font-weight: 600;
+   color: #ffffff;
+   background-color: #1ab394;
+   padding: 6px 12px;
+   position: absolute;
+   top: 250px;
+   right: 0;
+  }
+
+  .product-name {
+   font-size: 16px;
+   font-weight: 600;
+   color: #676a6c;
+   display: block;
+   margin: 2px 0 5px 0;
+ }
+
+.favor_bar{
+  margin-right: 10px;
+}
+
+.favor_bar .btn{
+  margin: 5px;
+}
+
