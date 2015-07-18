@@ -25,13 +25,18 @@
        		                 
        		             </div>
        		             <div class="row pull-right favor_bar">
-       		             		<% url = "/products/#{@product.first.asin}/photofeeds/#{insta.id}" %>
-       		             		<%= button_to "delete", url, method: :delete %>
-   		             				<button class="btn btn-default" type="button"><i class="fa fa-heart"></i>
-   		             		    </button>
+                          <% if current_user %>
+                            <% if current_user.id == @all_instas.first.user_id %>
+                              <% url = "/products/#{@product.first.asin}/photofeeds/#{insta.id}" %>
+                              <div style="display:inline-block;">
+                                <%= button_to "delete", url, method: :delete, class: "btn btn-xs btn-default btn-outline" %>
+                              </div>
+                            <% end %>
+                          <% end %>
        		             		<button class="btn btn-danger btn-circle btn-outline" type="button"><i class="fa fa-heart"></i>
        		                </button>
        		                <a href="<%= @product.first.detail_page_url %>" class="btn btn-xs btn-outline btn-info">Add to Cart</i></a>
+
        		             </div>
        		          </div>
        		     </div>
@@ -39,5 +44,10 @@
                 </div>
                 <div class="layout_block"></div>
         <% end %>
-    <% end %>               
+    <% end %>
+    <div class="row">
+      <div class="col-sm-12">
+        <%= render 'amznasins/upload' %>
+      </div>
+    </div>               
 </div>

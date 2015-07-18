@@ -22,13 +22,12 @@ class AmznasinsController < ApplicationController
 	  tags = Instagram.tag_search(params["/test"]["tags"])
 	  tags[0].name  
 	  tags[0].media_count
-	  for media_item in client.tag_recent_media(tags[0].name)
-	     asin = Photofeed.new(asin:params[:asin])
+	  for media_item in client.tag_recent_media(tags[0].name).first(5)
+	     asin = Photofeed.new(asin:params["/test"]["asin"])
 	     asin.description = "instagram"
 	     asin.photo = media_item.images.thumbnail.url
 	     asin.user = User.find(current_user.id)
 	     asin.amznasin = Amznasin.find_by(asin:params["/test"]["asin"])
-
 	     asin.save
 	  end
 

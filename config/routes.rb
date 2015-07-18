@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   post '/upload_feed', to: 'users#upload_photofeed'
 
+  post '/nonuser_upload', to: 'users#nonuser_upload'
+
   # get '/products/:asin', to: 'amznasins#show'
 
   resources :amznasins, path: :products, param: :asin do

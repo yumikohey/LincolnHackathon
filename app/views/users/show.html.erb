@@ -30,11 +30,11 @@
                         </div>
                         <div class="col-md-4">
                             
-                            <h5><strong><%= @user.click %></strong> Clicks </h5>
+                            <h5><strong><%= @user.visit %></strong> Clicks </h5>
                         </div>
                         <div class="col-md-4">
                             
-                            <h5><strong>$<%= @user.cashback %></strong> Cashback </h5>
+                            <h5><strong>$<%= @user.funding %></strong> Cashback </h5>
                         </div>
                     </div>
                     
@@ -87,7 +87,7 @@
                                 <% client = ASIN::Client.instance %>
                                 <% @product = client.lookup item.asin %>
                                     <% product_photo = Amznasin.find_by(asin:item.asin) %>
-                                    <a href="/products/<%= product_photo.asin %>"><img src="<%= item.photo %>"></a>
+                                    <a href="/products/<%= product_photo.asin%>"><img src="<%= item.photo %>"></a>
                              </div>
                              <div class="zoesh_sm_box_desc">
                                    <span class="product-price">
