@@ -5,15 +5,15 @@ default: &default
 
 development:
   <<: *default
-  database: zoesh_development
+  database: fundfashion_development
 
 test:
   <<: *default
-  database: zoesh_test
+  database: fundfashion_test
 
 production:
   <<: *default
-  database: zoesh_production
+  database: fundfashion_production
   host: ec2-107-22-175-206.compute-1.amazonaws.com
   port: 5432
 

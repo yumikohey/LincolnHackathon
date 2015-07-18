@@ -8,7 +8,7 @@
     <div class="col-md-4">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>Zoesher</h5>
+                <h5>Feeds</h5>
             </div>
             <div>
                 <div class="ibox-content no-padding border-left-right">
@@ -21,7 +21,7 @@
                         About me
                     </h5>
                     <p>
-                        <%= @user.desc %>
+                        <%= @user.description %>
                     </p>
                     <div class="row m-t-lg">
                         <div class="col-md-4">
@@ -30,27 +30,14 @@
                         </div>
                         <div class="col-md-4">
                             
-                            <h5><strong><%= @user.tiket %></strong> Tickets </h5>
+                            <h5><strong><%= @user.click %></strong> Clicks </h5>
                         </div>
                         <div class="col-md-4">
                             
                             <h5><strong>$<%= @user.cashback %></strong> Cashback </h5>
                         </div>
                     </div>
-                    <div class="user-button">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <button type="button" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope"></i> Send Message</button>
-                            </div>
-                            <div class="col-md-6">
-                                <button type="button" class="btn btn-default btn-sm btn-block"><i class="fa fa-coffee"></i> Buy a coffee</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                    	<%= link_to 'Amazon Login', '/auth/amazon' %>
-                    </div>
+                    
                 </div>
             </div>
         </div>
