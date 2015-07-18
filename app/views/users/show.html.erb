@@ -86,7 +86,8 @@
                                 <% require 'asin' %>
                                 <% client = ASIN::Client.instance %>
                                 <% @product = client.lookup item.asin %>
-                                    <a href="<%= @product.first.detail_page_url %>"><img src="<%= item.photo %>"></a>
+                                    <% product_photo = Amznasin.find_by(asin:item.asin) %>
+                                    <a href="/products/<%= product_photo.asin %>"><img src="<%= item.photo %>"></a>
                              </div>
                              <div class="zoesh_sm_box_desc">
                                    <span class="product-price">
@@ -130,41 +131,6 @@
 
 $(function() {
 
-    // var $image = $(".image-crop > img")
-    // $($image).cropper({
-    //     aspectRatio: 1.618,
-    //     preview: ".img-preview",
-    //     done: function (data) {
-    //         // Output the result data for cropping image.
-    //     }
-    // });
-
-    // var $inputImage = $(".file_upload");
-    // if (window.FileReader) {
-    //     $inputImage.change(function () {
-    //         var fileReader = new FileReader(),
-    //                 files = this.files,
-    //                 file;
-
-    //         if (!files.length) {
-    //             return;
-    //         }
-
-    //         file = files[0];
-
-    //         if (/^image\/\w+$/.test(file.type)) {
-    //             fileReader.readAsDataURL(file);
-    //             fileReader.onload = function () {
-    //                 $inputImage.val("");
-    //                 $image.cropper("reset", true).cropper("replace", this.result);
-    //             };
-    //         } else {
-    //             showMessage("Please choose an image file.");
-    //         }
-    //     });
-    // } else {
-    //     $inputImage.addClass("hide");
-    // }
 
 });
 

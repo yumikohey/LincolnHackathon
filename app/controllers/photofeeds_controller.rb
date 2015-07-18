@@ -2,6 +2,15 @@ class PhotofeedsController < ApplicationController
 	include SessionsHelper
 	include AmznasinsHelper
 
+	def index
+		asin_id = Amznasin.find_by(asin:params[:amznasin_asin]).id
+		@all_instas = Photofeed.where(amznasin:asin_id)
+		asin = params[:amznasin_asin]
+		require 'asin'
+  	client = ASIN::Client.instance
+  	@product = client.lookup asin
+	end
+
 	def new
 		@photofeed = Photofeed.new
 	end
@@ -19,7 +28,7 @@ class PhotofeedsController < ApplicationController
 	def destroy
 		@photofeed = Photofeed.find(params[:id])
     @photofeed.destroy
-    redirect_to photofeeds_path, notice:  "The photofeed #{@photofeed.asin} has been deleted."
+    redirect_to "/products/#{params[:amznasin_asin]}/photofeeds", notice:  "The photofeed #{@photofeed.asin} has been deleted."
 	end
 
 	private

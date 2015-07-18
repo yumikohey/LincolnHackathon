@@ -1,0 +1,14 @@
+<%= form_for '/test', :url => '/test', :html => {:class => "form-group"} do |f| %>
+  <span class="col-sm-2">
+    <%= f.label "Instagram Tag", class:"control-label" %>
+  </span>
+  <span class="col-sm-10">
+        <%= f.text_field :asin, :value => params[:asin], class:"hidden" %>
+    <div class="input-group">
+        <%= f.text_field :tags, class:"form-control" %>
+      <span class="input-group-btn">
+        <%= f.submit "Instagram!", class:"btn btn-primary" %>
+      </span>
+    </div>
+  </span> 
+<% end %>

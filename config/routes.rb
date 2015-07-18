@@ -14,17 +14,20 @@ Rails.application.routes.draw do
 
   post '/upload_feed', to: 'users#upload_photofeed'
 
-  get '/products/:asin', to: 'amznasins#show'
+  # get '/products/:asin', to: 'amznasins#show'
 
-  resources :photofeeds, only: [:new, :create, :destroy]
+  resources :amznasins, path: :products, param: :asin do
+    resources :photofeeds
+  end
 
   resources :users
 
+  get '/oauth', to: 'users#oauth_connect'
 
-  #post '/current_pain', to: 'option_chains#current_pain'
+  get '/oauth/callback', to: 'users#oauth_callback'
 
+  post '/test', to: 'amznasins#instagram'
 
-  # get '/weekly_pain', to: 'stocks#weekly_pain', as: 'weekly_pain'
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
