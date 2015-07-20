@@ -31,7 +31,7 @@ class AmznasinsController < ApplicationController
 	     asin.save
 	  end
 
-	  redirect_to root_path
+	  redirect_to "/products/#{params["/test"]["asin"]}/photofeeds"
 	end
 
 end

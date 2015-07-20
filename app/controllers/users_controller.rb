@@ -38,9 +38,9 @@ class UsersController < ApplicationController
     end
 
     if @photofeed.save
-      redirect_to user_path(current_user.id), notice: "The Photofeed #{@photofeed.asin} has been uploaded."
+      redirect_to "/products/#{params[:photofeed][:asin]}/photofeeds", notice: "The Photofeed #{@photofeed.asin} has been uploaded."
     else
-      redirect_to user_path(current_user.id), notice: "The failed."
+      redirect_to "/products/#{params[:photofeed][:asin]}/photofeeds", notice: "The failed."
     end
   end
 
